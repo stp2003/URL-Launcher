@@ -10,7 +10,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('URL Launcher'),
+        title: const Text(
+          'URL Launcher',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22.0,
+            letterSpacing: 0.8,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -18,18 +25,17 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             launcherButton(
-              title: 'Phone Number',
+              title: 'Phone Number Launcher',
               icon: Icons.phone,
               onPressed: () async {
                 Uri uri = Uri.parse('tel:+919336908109');
                 if (!await launcher.launchUrl(uri)) {
-                  debugPrint('couldnt');
+                  debugPrint('No');
                 }
-                ;
               },
             ),
             launcherButton(
-              title: 'Website',
+              title: 'Website Launcher',
               icon: Icons.language,
               onPressed: () {
                 launcher.launchUrl(
@@ -39,7 +45,7 @@ class HomeScreen extends StatelessWidget {
               },
             ),
             launcherButton(
-              title: 'SMS',
+              title: 'SMS Launcher',
               icon: Icons.message,
               onPressed: () => launcher.launchUrl(
                 Uri.parse(
@@ -47,14 +53,13 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             launcherButton(
-              title: 'Mail',
+              title: 'Mail Launcher',
               icon: Icons.mail,
               onPressed: () async {
                 Uri uri = Uri.parse('mailto:shashwatshandilya2003@gmail.com');
                 if (!await launcher.launchUrl(uri)) {
-                  debugPrint('couldnt');
+                  debugPrint('No');
                 }
-                ;
               },
             ),
           ],
@@ -68,15 +73,35 @@ class HomeScreen extends StatelessWidget {
     required IconData icon,
     required Function() onPressed,
   }) {
-    return Container(
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: ElevatedButton(
         onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          shape: BeveledRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          backgroundColor: const Color.fromRGBO(32, 28, 76, 1.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+            vertical: 10.0,
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon),
-            const SizedBox(width: 20),
-            Text(title),
+            Icon(
+              icon,
+              color: Colors.white70,
+            ),
+            const SizedBox(width: 20.0),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16.0,
+              ),
+            ),
           ],
         ),
       ),
